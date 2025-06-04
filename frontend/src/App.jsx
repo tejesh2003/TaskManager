@@ -16,6 +16,8 @@ import SortButton from "./components/sorting/SortButton";
 import SearchModal from "./components/SearchModal/SearchModal";
 import DateFilter from "./containers/Filters/dateFilter";
 import TimeFilter from "./containers/Filters/timeFilter";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 function App() {
   const [showModal, setShowModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
@@ -48,7 +50,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState([]);
   const [statusSelected, setStatusSelected] = useState([]);
-  const [addSelected, setAddSelected] = useState();
+  const [addSelected, setAddSelected] = useState("Call");
   const [tasks, setTasks] = useState([]);
   const [filteredTasks, setFilteredTasks] = useState([]);
   const [statusPosition, setStatusPosition] = useState({ top: 0, left: 0 });
@@ -175,7 +177,7 @@ function App() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/tasks");
+        const res = await axios.get(`${BASE_URL}/tasks`);
         setTasks(res.data);
       } catch (err) {
         console.error("Failed to fetch tasks:", err);
@@ -275,10 +277,8 @@ function App() {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `http://localhost:5000/api/deletetask/${editTaskData._id}`
-      );
-      const res = await axios.get("http://localhost:5000/api/tasks");
+      await axios.delete(`${BASE_URL}/deletetask/${editTaskData._id}`);
+      const res = await axios.get(`${BASE_URL}/tasks`);
       setTasks(res.data);
       setShouldRenderOptions(false);
     } catch (err) {
@@ -291,8 +291,8 @@ function App() {
       taskId: editTaskData._id,
     };
     try {
-      await axios.post("http://localhost:5000/api/duplicatetask", data);
-      const res = await axios.get("http://localhost:5000/api/tasks");
+      await axios.post(`${BASE_URL}/duplicatetask`, data);
+      const res = await axios.get(`${BASE_URL}/tasks`);
       setTasks(res.data);
       setShouldRenderOptions(false);
     } catch (err) {
@@ -307,8 +307,8 @@ function App() {
       taskId: editTaskData._id,
     };
     try {
-      await axios.patch("http://localhost:5000/api/editstatus", data);
-      const res = await axios.get("http://localhost:5000/api/tasks");
+      await axios.patch(`${BASE_URL}/editstatus`, data);
+      const res = await axios.get(`${BASE_URL}/tasks`);
       setTasks(res.data);
       setShouldRenderOptions(false);
     } catch (err) {
@@ -571,6 +571,8 @@ function App() {
         setContactPers={setContactPers}
         editNotes={editNotes}
         setEditNotes={setEditNotes}
+        setTasks={setTasks}
+        taskId={taskId}
       />
 
       <AddNotesModal

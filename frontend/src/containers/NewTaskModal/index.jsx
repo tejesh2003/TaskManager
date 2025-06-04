@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import "./styles.css";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const NewTaskModal = ({
   showModal,
@@ -45,11 +46,11 @@ export const NewTaskModal = ({
     };
 
     try {
-      await axios.post("http://localhost:5000/api/addtask", data);
-      const res = await axios.get("http://localhost:5000/api/tasks");
+      await axios.post(`${BASE_URL}/addtask`, data);
+      const res = await axios.get(`${BASE_URL}/tasks`);
       setTasks(res.data);
       setIsOpen(false);
-      setAddSelected("");
+      setAddSelected("Call");
       setDate("");
       setShowModal(false);
     } catch (err) {
@@ -199,8 +200,8 @@ export const EditTaskModal = ({
   setContactPers,
   editNotes,
   setEditNotes,
-  setTaskId,
   setTasks,
+  taskId,
 }) => {
   if (!editModal) return null;
 
@@ -222,8 +223,8 @@ export const EditTaskModal = ({
     };
 
     try {
-      await axios.patch("http://localhost:5000/api/edittask", data);
-      const res = await axios.get("http://localhost:5000/api/tasks");
+      await axios.patch(`${BASE_URL}/edittask/`, data);
+      const res = await axios.get(`${BASE_URL}/tasks`);
       setTasks(res.data);
       setIsOpen(false);
       setEditTaskType("");
@@ -232,9 +233,9 @@ export const EditTaskModal = ({
       setEntityNa("");
       setContactPers("");
       setEditNotes("");
-      setTaskId(null);
     } catch (err) {
       alert("Failed to edit task. Please try again.");
+      console.log(err);
     }
   };
 
@@ -341,8 +342,8 @@ export const AddNotesModal = ({ addNotes, setAddNotes, taskId, setTasks }) => {
     };
 
     try {
-      await axios.patch("http://localhost:5000/api/addnotes", data);
-      const res = await axios.get("http://localhost:5000/api/tasks");
+      await axios.patch(`${BASE_URL}/addnotes`, data);
+      const res = await axios.get(`${BASE_URL}/tasks`);
       setTasks(res.data);
       setAddNotes(false);
     } catch (err) {
