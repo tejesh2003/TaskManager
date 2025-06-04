@@ -64,6 +64,9 @@ function App() {
   const [editDate, setEditDate] = useState("");
   const [editTaskType, setEditTaskType] = useState();
   const [editNotes, setEditNotes] = useState("");
+  const [editHour, setEditHour] = useState("12");
+  const [editMinute, setEditMinute] = useState("00");
+  const [editPeriod, setEditPeriod] = useState("PM");
 
   const [addNotes, setAddNotes] = useState(false);
 
@@ -270,6 +273,9 @@ function App() {
     setEntityNa(editTaskData.entityName);
     setContactPers(editTaskData.contactPerson);
     setEditDate(editTaskData.date);
+    setEditHour(editTaskData.time.hour);
+    setEditMinute(editTaskData.time.minute);
+    setEditPeriod(editTaskData.time.period);
     setEditTaskType(editTaskData.taskType);
     setEditNotes(editTaskData.notes);
     setTaskId(editTaskData._id);
@@ -562,6 +568,12 @@ function App() {
         setEntityNa={setEntityNa}
         editDate={editDate}
         setEditDate={setEditDate}
+        editHour={editHour}
+        setEditHour={setEditHour}
+        editMinute={editMinute}
+        setEditMinute={setEditMinute}
+        editPeriod={editPeriod}
+        setEditPeriod={setEditPeriod}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         options={options}

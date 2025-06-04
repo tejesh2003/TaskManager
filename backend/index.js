@@ -88,8 +88,26 @@ app.delete("/api/deletetask/:id", async (req, res) => {
 });
 
 app.patch("/api/edittask", async (req, res) => {
-  const { entityName, taskType, date, contactPerson, notes, taskId } = req.body;
-  if (!entityName || !date || !taskType || !contactPerson || !notes) {
+  const {
+    entityName,
+    taskType,
+    date,
+    hour,
+    minute,
+    period,
+    contactPerson,
+    notes,
+    taskId,
+  } = req.body;
+  if (
+    !entityName ||
+    !date ||
+    !taskType ||
+    !contactPerson ||
+    !hour ||
+    !minute ||
+    !period
+  ) {
     return res.status(400).json({ error: "Missing required fields" });
   }
   try {
@@ -99,6 +117,11 @@ app.patch("/api/edittask", async (req, res) => {
         entityName,
         taskType,
         date: new Date(date),
+        time: {
+          hour: hour,
+          minute: minute,
+          period: period,
+        },
         contactPerson,
         notes,
       },

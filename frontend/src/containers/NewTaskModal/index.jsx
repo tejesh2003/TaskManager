@@ -83,7 +83,7 @@ export const NewTaskModal = ({
               value={date}
               onChange={(e) => setDate(e.target.value)}
             />
-            <div class="time-select">
+            <div className="time-select">
               <select
                 value={hour}
                 onChange={(e) => setHour(Number(e.target.value))}
@@ -191,6 +191,12 @@ export const EditTaskModal = ({
   setEntityNa,
   editDate,
   setEditDate,
+  editHour,
+  setEditHour,
+  editMinute,
+  setEditMinute,
+  editPeriod,
+  setEditPeriod,
   isOpen,
   setIsOpen,
   options,
@@ -216,6 +222,9 @@ export const EditTaskModal = ({
       entityName: entityNam,
       taskType: editTaskType,
       date: editDate,
+      hour: editHour,
+      minute: editMinute,
+      period: editPeriod,
       contactPerson: contactPers,
       notes: editNotes,
       status: "Open",
@@ -229,6 +238,9 @@ export const EditTaskModal = ({
       setIsOpen(false);
       setEditTaskType("");
       setEditDate("");
+      setEditHour("");
+      setEditMinute("");
+      setEditPeriod("");
       setEditModal(false);
       setEntityNa("");
       setContactPers("");
@@ -257,13 +269,46 @@ export const EditTaskModal = ({
             value={entityNam}
             onChange={(e) => setEntityNa(e.target.value)}
           />
+          <div className="date-time">
+            <input
+              type="date"
+              required
+              value={editDate?.slice(0, 10)}
+              onChange={(e) => setEditDate(e.target.value)}
+            />
 
-          <input
-            type="date"
-            required
-            value={editDate?.slice(0, 10)}
-            onChange={(e) => setEditDate(e.target.value)}
-          />
+            <div className="time-select">
+              <select
+                value={editHour}
+                onChange={(e) => setEditHour(Number(e.target.value))}
+              >
+                {Array.from({ length: 12 }, (_, i) => (
+                  <option key={i} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                value={editMinute}
+                onChange={(e) => setEditMinute(Number(e.target.value))}
+              >
+                {Array.from({ length: 60 }, (_, i) => (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                ))}
+              </select>
+
+              <select
+                value={editPeriod}
+                onChange={(e) => setEditPeriod(e.target.value)}
+              >
+                <option value="AM">AM</option>
+                <option value="PM">PM</option>
+              </select>
+            </div>
+          </div>
 
           <div className="custom-dropdown" onClick={() => setIsOpen(!isOpen)}>
             <div className="selected">
@@ -314,6 +359,9 @@ export const EditTaskModal = ({
                 setIsOpen(false);
                 setEditTaskType("");
                 setEditDate("");
+                setEditHour("");
+                setEditMinute("");
+                setEditPeriod("");
               }}
               className="cancel-btn"
             >
