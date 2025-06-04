@@ -1,0 +1,105 @@
+.filter-search-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  margin-bottom: 1rem;
+}
+.selected-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.selected-item-box {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  min-width: 80px;
+  background-color: #f9f9f9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.filter-heading {
+  font-size: 0.8rem;
+  color: #555;
+  margin: 0 0 4px 0;
+  font-weight: 600;
+}
+
+.filter-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+}
+
+.remove-btn:hover {
+  color: #d00;
+}
+
+.status-modal {
+  position: absolute;
+  z-index: 1000;
+  background-color: white;
+  padding: 0px 12px 24px 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  width: 220px;
+}
+
+.status-modal-title {
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  padding-left: 12px;
+  display: flex;
+  text-align: left;
+  justify-items: center;
+}
+
+.status-modal-buttons {
+  display: flex;
+  border: none;
+  border-radius: 6px;
+  padding: 0px 8px;
+  overflow: hidden;
+}
+
+.status-btn {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+}
+
+.status-btn.openo {
+  background-color: #f97316;
+  color: white;
+}
+
+.status-btn.closedo {
+  background-color: #f3f4f6;
+  color: #333;
+}
+
+.status-btn.openc {
+  background-color: #f3f4f6;
+  color: #333;
+}
+
+.status-btn.closedc {
+  background-color: rgb(78, 149, 194);
+  color: white;
+}
